@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All orders</title>
+    <style>
+        *{
+            margin:0%;padding:0%;font-family: monospace,'Courier New', Courier;font-weight: 500;
+        }
+        body{
+            background-color: #eee;
+        }
+        #header{
+            background-color: white;
+            padding:1%;
+            font-size:25px;
+            box-shadow:0px 3px 3px 0px #bbb;
+        }
+        #order-section{
+            background-color: white;
+            padding:2%;
+            margin:1%;
+            box-shadow:0px 3px 3px 0px #bbb;
+        }
+        #order{
+            border:0.5px solid black;
+            margin:1% 0.5%;
+            padding:1% 0.5%;
+            background-color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <section id="header">
+        Bouquet Management : Orders
+    </section>
+    <section id="order-section">
+        <section id="order">
+            <div id="order-count">Order 1</div>
+            <div id="personal">
+            Email : <div>email@address.com</div>
+            Address : <div>house number, colony, city, state , Pin Code</div>
+            </div>
+            <div id="flowers">Flowers : 
+                <div>
+                <img src="p1.jpeg" width="70" height="45"/> - NameOne - Cost 
+                </div><div>
+                <img src="p2.jpeg" width="70" height="45"/> - NameOne - Cost 
+                </div><div>
+                <img src="p3.jpeg" width="70" height="45"/> - NameOne - Cost 
+                </div><div>
+                <img src="p7.jpeg" width="70" height="45"/> - NameOne - Cost 
+                </div><div>
+                <img src="p8.jpeg" width="70" height="45"/> - NameOne - Cost 
+                </div>
+            </div>
+        </section>
+    </section>
+    <script>
+        var flowers = null;
+        var orders = null;
+        async function init(){
+            if(flowers==null){
+                await fetch('http://localhost:8001/flower').then(res=>res.json()).then(d=>{
+                    flowers=d;
+                });
+            }
+            if(orders==null){
+                await fetch('http://localhost:8001/orders').then(res=>res.json()).then(d=>{
+                    orders=d;
+                })
+            }
+            var allOrders="";
+            for(i=0;i<orders.orderes.length;i++){
+                allOrders+="<section id='order'><div id='order-count'>Order "+(i+1)+"</div>";
+                allOrders+="<div id='personal'>Email : <div>"+orders.orderes[i].Email+"</div>Address : <div>";
+                allOrders+=orders.orderes[i].Address+"</div></div><div id='flowers'>Flowers :";
+                for(j=0;j<orders.orderes[i].Flowers.length;j++){
+                    for(k=0;k<flowers.flower.length;k++){
+                        if(orders.orderes[i].Flowers[j]==flowers.flower[k].ID){
+                            allOrders+='<div><img src="'+flowers.flower[k].IMG+'" width="100" height="65"/> - '+flowers.flower[k].Name+' - '+flowers.flower[k].Cost+' </div>'
+                        }
+                    }
+                }
+                allOrders+="</div></section>";
+            }
+            document.getElementById("order-section").innerHTML=allOrders;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "bouquet-management",
+  "version": "1.0.0",
+  "description": "This is the project for SE - Bouquet Management System",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server",
+    "start": "node server.js"
+  },
+  "author": "Harsh Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11"
+  }
+}
