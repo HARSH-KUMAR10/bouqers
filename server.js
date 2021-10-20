@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const db = require('./db/db');
-const PORT = process.env.PORT | 8001;
+const PORT = process.env.PORT || 8001;
 const fs = require('fs');
 
 app.get('/',(req,res)=>{
