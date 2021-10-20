@@ -66,12 +66,12 @@
         var orders = null;
         async function init(){
             if(flowers==null){
-                await fetch('http://localhost:8001/flower').then(res=>res.json()).then(d=>{
+                await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
                     flowers=d;
                 });
             }
             if(orders==null){
-                await fetch('http://localhost:8001/orders').then(res=>res.json()).then(d=>{
+                await fetch('https://bouquet-ms.herokuapp.com/orders').then(res=>res.json()).then(d=>{
                     orders=d;
                 })
             }
