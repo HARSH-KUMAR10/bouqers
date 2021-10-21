@@ -48,7 +48,7 @@
                <a class="mr-5 hover:text-gray-900" href="index.html">Home</a>
                <a class="mr-5 hover:text-gray-900" href="about.html">About us</a>
                
-               <a class="mr-6 hover:text-gray-900" href="cart.html">
+               <a class="mr-6 hover:text-gray-900" href="/admin">
                 <i class="fas fa-shopping-cart"></i>
                </a>
 
@@ -304,8 +304,11 @@
           fillItems();
         }
         async function init(){
-          await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
-            flowers=d;
+          // await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
+          //   flowers=d;
+          // });
+          await fetch('http://localhost:8001/flower').then(res=>res.json()).then(d=>{
+             flowers=d;
           });
         }
         async function fillItems(){
@@ -337,7 +340,9 @@
             document.getElementById('error1').style.display="none";
             var email = document.getElementById('UserEmail').value;
             var address = document.getElementById('UserAddress').value;
-            await fetch('https://bouquet-ms.herokuapp.com/addItems?userEmail='+email+'&userOrder='+flowerArray+'&userAddress='+address).then(res=>res.json()).then(d=>{
+            var url = 'https://bouquet-ms.herokuapp.com/addItems?userEmail=';
+            url = 'http://localhost:8001/addItems?userEmail=';
+            await fetch(url+email+'&userOrder='+flowerArray+'&userAddress='+address).then(res=>res.json()).then(d=>{
               if(d){
                 document.getElementById('error2').style.display="block";
                 document.getElementById('error3').style.display="none";
