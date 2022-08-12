@@ -13,7 +13,6 @@ var orders = new mongoose.Schema({
     Email: {
         type: String,
         required: true,
-        unique: true,
         lowercase: true,
     },
     Flowers:mongoose.Schema.Types.Array,

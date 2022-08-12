@@ -19,12 +19,13 @@ app.get('/addItems',(req,res)=>{
     db.order.collection.insertOne({
         Email:email,
         Flowers:products,
-        Address:address
+        Address:address,
+        DateTime:new Date()
     },(err,result)=>{
         if(err){
-            res.json(false);
+            res.json({statusCode:400,message:'Error Occured',data:err});
         }else{
-            res.json(true);
+            res.json({statusCode:200,message:'Data Entered successfully',data:result});
         }
     })
 })

@@ -1,62 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Arima&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <title>All orders</title>
     <style>
-        *{
-            margin:0%;padding:0%;font-family: monospace,'Courier New', Courier;font-weight: 500;
+        * {
+            margin: 0%;
+            padding: 0%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 500;
         }
-        body{
+
+        body {
             background-color: #eee;
         }
-        #header{
+
+        #header {
             background-color: white;
-            padding:1%;
-            font-size:25px;
-            box-shadow:0px 3px 3px 0px #bbb;
+            padding: 1%;
+            font-size: 25px;
+            box-shadow: 0px 3px 3px 0px #bbb;
+            font-family: "Arima", cursive;
+            font-weight: 900;
         }
-        #order-section{
+
+        #order-section,
+        #sections {
             background-color: white;
-            padding:2%;
-            margin:1%;
-            box-shadow:0px 3px 3px 0px #bbb;
+            padding: 2%;
+            margin: 1%;
+            box-shadow: 0px 3px 3px 0px #bbb;
+            border-radius: 5px;
         }
-        #order{
-            border:0.5px solid black;
-            margin:1% 0.5%;
-            padding:1% 0.5%;
+
+        #order {
+            border: 0.1px solid gray;
+            padding: 10px;
             background-color: white;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: space-between;
+        }
+
+        canvas {
+            max-width: 350px;
+            margin:auto;
         }
     </style>
 </head>
+
 <body onload="init()">
-    <section id="header">
-        Bouquet Management : Orders
+    <section id="header">Bouqers: Bouquet Management-Orders</section>
+    <section class="m-3 p-2 bg-secondary rounded" id="graphs">
+        <section id="graphs-navs row justify-content-around">
+            <button class="btn btn-light col-2" onclick="location.href='#order-section'">All orders</button>
+            <span class="col-1"></span>
+            <button class="btn btn-light col-2" onclick="getOrdersByDate()">Orders by Date</button>
+            <span class="col-1"></span>
+            <button class="btn btn-light col-2" onclick="getOrderByPrice()">Orders by price</button>
+            <span class="col-1"></span>
+            <button class="btn btn-light col-2" onclick="getOrdersByFlowers()">Orders by flower</button>
+        </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+        <div class="p-3 m-3 text-dark bg-light">
+            <canvas id="myChart" width="100" height="100"></canvas>
+        </div>
+    </section>
+
+    <section id="sections" style="
+        background-color: darkcyan;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      ">
+        <hr />
+        <h5>Why bouqers was developed?</h5>
+        <br />
+        <h6>
+            We wanted to create a platform for buying flowers online. At anytime,
+            anywhere you can book a flower for your loved once and get it delievered
+            to your home. Shopping online is much better than going into stalls and
+            shops to buy goods and ask for services to be rendered because it saves
+            a lot of time.<br /><br />
+            One can easily browse through different online shops and e-commerce
+            stores to select whatever they want within the shortest possible time.
+            So we came up with this project.
+        </h6>
+        <hr />
+        <h5>How bouqers was developed?</h5>
+        <br />
+        <h6>
+            We started with this project in the group of 3 people where our main
+            focus was to have a working online shopping store, a checkout section,
+            an online inventory, a dashboard with all the data about the
+            business.<br /><br />We used NodeJS as the backend programming language,
+            used HTMl-CSS-JavaScript for the front-end development and used MongoDB
+            Atlas as the database for this project.<br /><br />We have a range of
+            fowers to choose from and flexible built-in cart system. Use the system
+            today to buy your loved once some flowers
+        </h6>
+        <hr />
+        <h5>About us</h5>
+        <br />
+        <h6>
+            Geetanjali Purohit - geetanjalipurohit19@gnu.ac.in<br /><br />
+            Meet Gajjar - meetgajjar19@gnu.ac.in<br /><br />
+            Harsh Kumar - harshkumar19@gnu.ac.in<br /><br />
+        </h6>
+        <hr />
     </section>
     <section id="order-section">
         <section id="order">
             <div id="order-count">Order 1</div>
             <div id="personal">
-            Email : <div>email@address.com</div>
-            Address : <div>house number, colony, city, state , Pin Code</div>
+                Email :
+                <div>email@address.com</div>
+                Address :
+                <div>house number, colony, city, state , Pin Code</div>
             </div>
-            <div id="flowers">Flowers : 
+            <div id="flowers">
+                Flowers :
                 <div>
-                <img src="p1.jpeg" width="70" height="45"/> - NameOne - Cost 
-                </div><div>
-                <img src="p2.jpeg" width="70" height="45"/> - NameOne - Cost 
-                </div><div>
-                <img src="p3.jpeg" width="70" height="45"/> - NameOne - Cost 
-                </div><div>
-                <img src="p7.jpeg" width="70" height="45"/> - NameOne - Cost 
-                </div><div>
-                <img src="p8.jpeg" width="70" height="45"/> - NameOne - Cost 
+                    <img src="p1.jpeg" width="60" height="35" /> - NameOne - Cost
+                </div>
+                <div>
+                    <img src="p2.jpeg" width="60" height="35" /> - NameOne - Cost
+                </div>
+                <div>
+                    <img src="p3.jpeg" width="60" height="35" /> - NameOne - Cost
+                </div>
+                <div>
+                    <img src="p7.jpeg" width="60" height="35" /> - NameOne - Cost
+                </div>
+                <div>
+                    <img src="p8.jpeg" width="60" height="35" /> - NameOne - Cost
                 </div>
             </div>
         </section>
@@ -64,39 +157,266 @@
     <script>
         var flowers = null;
         var orders = null;
-        async function init(){
-            if(flowers==null){
+        var ordersByDateCount = [];
+        var dataLabels = []
+        var dataVals = []
+        var dataPrice = []
+        async function init() {
+            if (flowers == null) {
                 // await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
                 //     flowers=d;
                 // });
-                await fetch('http://localhost:8001/flower').then(res=>res.json()).then(d=>{
-                    flowers=d;
-                });
+                await fetch("http://localhost:8001/flower")
+                    .then((res) => res.json())
+                    .then((d) => {
+                        flowers = d;
+                    });
             }
-            if(orders==null){
+            if (orders == null) {
                 // await fetch('https://bouquet-ms.herokuapp.com/orders').then(res=>res.json()).then(d=>{
                 //     orders=d;
                 // })
-                await fetch('http://localhost:8001/orders').then(res=>res.json()).then(d=>{
-                    orders=d;
-                })
+                await fetch("http://localhost:8001/orders")
+                    .then((res) => res.json())
+                    .then((d) => {
+                        orders = d;
+                    });
             }
-            var allOrders="";
-            for(i=0;i<orders.orderes.length;i++){
-                allOrders+="<section id='order'><div id='order-count'>Order "+(i+1)+"</div>";
-                allOrders+="<div id='personal'>Email : <div>"+orders.orderes[i].Email+"</div>Address : <div>";
-                allOrders+=orders.orderes[i].Address+"</div></div><div id='flowers'>Flowers :";
-                for(j=0;j<orders.orderes[i].Flowers.length;j++){
-                    for(k=0;k<flowers.flower.length;k++){
-                        if(orders.orderes[i].Flowers[j]==flowers.flower[k].ID){
-                            allOrders+='<div><img src="'+flowers.flower[k].IMG+'" width="100" height="65"/> - '+flowers.flower[k].Name+' - '+flowers.flower[k].Cost+' </div>'
+            var allOrders =
+                "<br/><br/><h2>All the orders:</h2><br/><table cellspacing='0' cellpadding='20' border='1px'><tr style='background-color:#2962ff;color:white;'><th style='padding:20px'> # </th><th style='padding:20px'>Address</th><th>Date</th><th>Time</th><th style='padding:20px'>Items</th></tr>";
+            var total = [];
+            for (i = 0; i < orders.orderes.length; i++) {
+                total[i] = 0;
+                var date = new Date(orders.orderes[i].DateTime);
+
+                allOrders +=
+                    "<tr><td style='padding:10px 50px;'>0" + (i + 1) + "</td>";
+                allOrders +=
+                    "<td style='padding:10px 50px;'><div> Email: <span>" +
+                    orders.orderes[i].Email +
+                    "</span></div><div> Address: <span>";
+                allOrders +=
+                    orders.orderes[i].Address +
+                    "</span></div></td><td style='padding:10px 30px;'>" + date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + "</td><td style='padding:10px 30px;'>" + date.getHours() + ":" + (date.getMinutes()) + ":" + (date.getSeconds()) + "</td><td style='padding:10px 50px;' id='flowers'>Flowers :<br/>";
+                for (j = 0; j < orders.orderes[i].Flowers.length; j++) {
+                    for (k = 0; k < flowers.flower.length; k++) {
+                        if (orders.orderes[i].Flowers[j] == flowers.flower[k].ID) {
+                            allOrders +=
+                                '<div style="padding:5px;"><img src="' +
+                                flowers.flower[k].IMG +
+                                '" width="60" height="35"/>[' +
+                                flowers.flower[k].Name +
+                                "] ₹" +
+                                flowers.flower[k].Cost +
+                                " </div>";
+                            total[i] += parseInt(flowers.flower[k].Cost);
                         }
                     }
                 }
-                allOrders+="</div></section>";
+                dataPrice.push({ date: (date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()), total: total[i] })
+                allOrders += "</td></tr>";
             }
-            document.getElementById("order-section").innerHTML=allOrders;
+            allOrders += "</table>";
+            document.getElementById("order-section").innerHTML = allOrders;
+            orderAggregate();
+        }
+        function orderAggregate() {
+            ordersByDateCount = [{ id: ' ', list: [] }]
+            for (i = 0; i < orders.orderes.length; i++) {
+                var date = new Date(orders.orderes[i].DateTime);
+                var Id = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                var added = false;
+                for (var j = 0; j < ordersByDateCount.length; j++) {
+                    item = ordersByDateCount[j];
+                    if (item.id == Id) {
+                        added = true;
+                        item.list.push(orders.orderes[i]);
+                    }
+                }
+                if (!added) {
+                    ordersByDateCount.push({ id: Id, list: [orders.orderes[i]] });
+                }
+            }
+            for (i = 0; i < ordersByDateCount.length; i++) {
+                dataLabels.push(ordersByDateCount[i].id);
+                dataVals.push(ordersByDateCount[i].list.length);
+            }
+        }
+        function getOrdersByDate() {
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: dataLabels,
+                    datasets: [{
+                        barPercentage: 0.9,
+                        categoryPercentage: 1,
+                        label: 'Flower Count',
+                        data: dataVals,
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                    }]
+                }, options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Flowers bought by date'
+                    },
+                    tooltips: {
+                        mode: 'label',
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                                userCallback: function (label, index, labels) {
+                                    if (typeof label === "string") {
+                                        return label.substring(0, 1)
+                                    }
+                                    return label
+                                },
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Flower Count'
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+        function getOrderByPrice() {
+            var groupDataPrice = [];
+            for (i = 0; i < dataPrice.length; i++) {
+                var found = false;
+                for (j = 0; j < groupDataPrice.length; j++) {
+                    if (dataPrice[i].date === groupDataPrice[j].id) {
+                        found = true;
+                        groupDataPrice[j].price += dataPrice[i].total;
+                        break;
+                    }
+                }
+                if (!found) {
+                    groupDataPrice.push({ id: dataPrice[i].date, price: dataPrice[i].total });
+                }
+            }
+            pieChartDate = ['']
+            pieChartPrice = [0]
+            for (i = 0; i < groupDataPrice.length; i++) {
+                pieChartDate.push(groupDataPrice[i].id);
+                pieChartPrice.push(groupDataPrice[i].price);
+            }
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: pieChartDate,
+                    datasets: [{
+                        barPercentage: 0.9,
+                        categoryPercentage: 1,
+                        label: 'Flower Count',
+                        data: pieChartPrice,
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                    }]
+                }, options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Total income by date'
+                    },
+                    tooltips: {
+                        mode: 'label',
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                                userCallback: function (label, index, labels) {
+                                    if (typeof label === "string") {
+                                        return label.substring(0, 1)
+                                    }
+                                    return label
+                                },
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Total Income'
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+        function getOrdersByFlowers() {
+            var flowersCount = []
+            for(i=0;i<orders.orderes.length;i++){
+                for(j=0;j<orders.orderes[i].Flowers.length;j++){
+                    var found = false;
+                    for(k=0;k<flowersCount.length;k++){
+                        if(orders.orderes[i].Flowers[j]===flowersCount[k].id){
+                            found = true;
+                            flowersCount[k].count++;
+                            break;
+                        }
+                    }
+                    if(!found){
+                        flowersCount.push({id:orders.orderes[i].Flowers[j],count:0});
+                    }
+                }
+            }
+            for(i=0;i<flowersCount.length;i++){
+                for(j=0;j<flowers.flower.length;j++){
+                    if(flowersCount[i].id===flowers.flower[j].ID){
+                        flowersCount[i].id = flowers.flower[j].Name;
+                        break;
+                    }
+                }
+            }
+            var name = [];
+            var count = [];
+            var color = [];
+            for(i=0;i<flowersCount.length;i++){
+                name.push(flowersCount[i].id);
+                count.push(flowersCount[i].count);
+                color.push('#'+(Math.floor(Math.random()*1000)));
+            }
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: name,
+                    datasets: [{
+                        barPercentage: 0.9,
+                        categoryPercentage: 1,
+                        label: 'Flower Count',
+                        data: count,
+                        backgroundColor: color,
+                    }]
+                }
+            });
         }
     </script>
 </body>
+
 </html>
