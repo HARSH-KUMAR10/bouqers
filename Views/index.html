@@ -331,10 +331,10 @@
       fillItems();
     }
     async function init() {
-      // await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
+      // await fetch('/flower').then(res=>res.json()).then(d=>{
       //   flowers=d;
       // });
-      await fetch('http://localhost:8001/flower').then(res => res.json()).then(d => {
+      await fetch('/flower').then(res => res.json()).then(d => {
         flowers = d;
       });
     }
