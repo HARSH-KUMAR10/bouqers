@@ -163,20 +163,20 @@
         var dataPrice = []
         async function init() {
             if (flowers == null) {
-                // await fetch('https://bouquet-ms.herokuapp.com/flower').then(res=>res.json()).then(d=>{
+                // await fetch('/flower').then(res=>res.json()).then(d=>{
                 //     flowers=d;
                 // });
-                await fetch("http://localhost:8001/flower")
+                await fetch("/flower")
                     .then((res) => res.json())
                     .then((d) => {
                         flowers = d;
                     });
             }
             if (orders == null) {
-                // await fetch('https://bouquet-ms.herokuapp.com/orders').then(res=>res.json()).then(d=>{
+                // await fetch('/orders').then(res=>res.json()).then(d=>{
                 //     orders=d;
                 // })
-                await fetch("http://localhost:8001/orders")
+                await fetch("/orders")
                     .then((res) => res.json())
                     .then((d) => {
                         orders = d;
